@@ -143,6 +143,15 @@
         "link": "https://github.com/sharkdp/bat",
         "winget": "sharkdp.bat"
     },
+    "beeper": {
+        "category": "Communications",
+        "choco": "na",
+        "content": "Beeper",
+        "description": "All your chats in one app",
+        "link": "https://www.beeper.com/",
+        "winget": "Beeper.Beeper"
+    },
+
     "bitwarden": {
         "category": "Utilities",
         "choco": "bitwarden",
@@ -511,6 +520,14 @@
         "link": "https://emulationstation.org/",
         "winget": "Emulationstation.Emulationstation"
     },
+    "enteauth": {
+        "category": "Utilities",
+        "choco": "ente-auth",
+        "content": "Ente Auth",
+        "description": "Ente Auth is a free, cross-platform, end-to-end encrypted authenticator app.",
+        "link": "https://ente.io/auth/",
+        "winget": "ente-io.auth-desktop"
+    },
     "epicgames": {
         "category": "Games",
         "choco": "epicgameslauncher",
@@ -831,14 +848,6 @@
         "link": "https://gerardog.github.io/gsudo/",
         "winget": "gerardog.gsudo"
     },
-    "guilded": {
-        "category": "Communications",
-        "choco": "na",
-        "content": "Guilded",
-        "description": "Guilded is a communication and productivity platform that includes chat, scheduling, and collaborative tools for gaming and communities.",
-        "link": "https://www.guilded.gg/",
-        "winget": "Guilded.Guilded"
-    },
     "handbrake": {
         "category": "Multimedia Tools",
         "choco": "handbrake",
@@ -982,6 +991,14 @@
         "description": "Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK).",
         "link": "https://aws.amazon.com/corretto",
         "winget": "Amazon.Corretto.21.JDK"
+    },
+    "java25": {
+        "category": "Development",
+        "choco": "corretto25jdk",
+        "content": "Amazon Corretto 25 (LTS)",
+        "description": "Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK).",
+        "link": "https://aws.amazon.com/corretto",
+        "winget": "Amazon.Corretto.25.JDK"
     },
     "jdownloader": {
         "category": "Utilities",
@@ -1703,13 +1720,13 @@
         "link": "https://bitsum.com/",
         "winget": "BitSum.ProcessLasso"
     },
-    "spotify": {
-        "category": "Multimedia Tools",
-        "choco": "spotify",
-        "content": "Spotify",
-        "description": "Spotify is a digital music service that gives you access to millions of songs, podcasts, and videos from artists all over the world.",
-        "link": "https://www.spotify.com/",
-        "winget": "Spotify.Spotify"
+    "protonauth": {
+        "category": "Utilities",
+        "choco": "protonauth",
+        "content": "Proton Authenticator",
+        "description": "2FA app from Proton to securely sync and backup 2FA codes.",
+        "link": "https://proton.me/authenticator",
+        "winget": "Proton.ProtonAuthenticator"
     },
     "processmonitor": {
         "category": "Microsoft Tools",
@@ -1757,7 +1774,7 @@
         "content": "Python3",
         "description": "Python is a versatile programming language used for web development, data analysis, artificial intelligence, and more.",
         "link": "https://www.python.org/",
-        "winget": "Python.Python.3.13"
+        "winget": "Python.Python.3.14"
     },
     "qbittorrent": {
         "category": "Utilities",
@@ -2169,7 +2186,7 @@
     },
     "thorium": {
         "category": "Browsers",
-        "choco": "na",
+        "choco": "thorium",
         "content": "Thorium Browser AVX2",
         "description": "Browser built for speed over vanilla chromium. It is built with AVX2 optimizations and is the fastest browser on the market.",
         "link": "https://thorium.rocks/",
@@ -2910,5 +2927,13 @@
         "description": "The modern, privacy-focused, performance-driven browser built on Firefox",
         "link": "https://zen-browser.app/",
         "winget": "Zen-Team.Zen-Browser"
+    },
+    "Zed": {
+        "category": "Development",
+        "choco": "na",
+        "content": "Zed",
+        "description": "Zed is a modern, high-performance code editor designed from the ground up for speed and collaboration.",
+        "link": "https://zed.dev/",
+        "winget": "Zed.Zed"
     }
 }
