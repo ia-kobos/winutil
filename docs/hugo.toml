@@ -12,40 +12,64 @@ canonifyURLs = true
 path = "github.com/imfing/hextra"
 
 [[menu.main]]
-name = "Documentation"
-pageRef = "/dev"
+identifier = "userguide"
+name = "User Guides"
+pageRef = "/userguide"
 weight = 1
 
 [[menu.main]]
-name = "User Guides"
-pageRef = "/userguide"
+identifier = "documentation"
+name = "Developer Documentation"
 weight = 2
 
 [[menu.main]]
+identifier = "contribution-guides"
 name = "Contribution Guides"
 pageRef = "CONTRIBUTING.md"
+weight = 1
+parent = "documentation"
+
+[[menu.main]]
+identifier = "developer-documentation"
+name = "Developer Docs"
+pageRef = "/dev"
+weight = 2
+parent = "documentation"
+
+[[menu.main]]
+identifier = "help"
+name = "Help"
 weight = 3
 
 [[menu.main]]
+identifier = "faq"
 name = "FAQ"
 pageRef = "faq.md"
-weight = 4
+weight = 1
+parent = "help"
 
 [[menu.main]]
+identifier = "known-issues"
 name = "Known Issues"
 pageRef = "KnownIssues.md"
-weight = 4
+weight = 2
+parent = "help"
+
+[[menu.main]]
+name = "Store"
+url = "https://christitus.com/downloads/"
+weight = 5
 
 [[menu.main]]
 name = "Search"
-weight = 5
+weight = 6
 
   [menu.main.params]
   type = "search"
 
 [[menu.main]]
 name = "GitHub"
-weight = 6
+weight = 7
 url = "https://github.com/christitustech/Winutil"
 
   [menu.main.params]
@@ -77,7 +101,7 @@ dateFormat = "January 2, 2006"
   [params.footer]
   enable = true
   displayCopyright = true
-  displayPoweredBy = true
+  displayPoweredBy = false
   width = "normal"
 
 [params.highlight.copy]

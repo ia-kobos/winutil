@@ -69,7 +69,6 @@ function Invoke-WPFUIElements {
         # Create an object for the application
         $entryObject = [PSCustomObject]@{
             Name        = $entry
-            Order       = $entryInfo.order
             Category    = $entryInfo.Category
             Content     = $entryInfo.Content
             Panel       = if ($entryInfo.Panel) { $entryInfo.Panel } else { "0" }
@@ -144,8 +143,14 @@ function Invoke-WPFUIElements {
             $itemsControl.Items.Add($label) | Out-Null
             $sync[$category] = $label
 
-            # Sort entries by Order and then by Name
-            $entries = $organizedData[$panelKey][$category] | Sort-Object Order, Name
+            # Sort entries by type (checkboxes first, then buttons, then comboboxes) and then alphabetically by Content
+            $entries = $organizedData[$panelKey][$category] | Sort-Object @{Expression = {
+                switch ($_.Type) {
+                    'Button' { 1 }
+                    'Combobox' { 2 }
+                    default { 0 }
+                }
+            }}, Content
             foreach ($entryInfo in $entries) {
                 $count++
                 # Create the UI elements based on the entry type
@@ -171,18 +176,32 @@ function Invoke-WPFUIElements {
                         $itemsControl.Items.Add($dockPanel) | Out-Null
 
                         $sync[$entryInfo.Name] = $checkBox
+                        if ($entryInfo.Name -eq "WPFToggleFOSSHighlight") {
+                             if ($entryInfo.Checked -eq $true) {
+                                 $sync[$entryInfo.Name].IsChecked = $true
+                             }
 
-                        $sync[$entryInfo.Name].IsChecked = (Get-WinUtilToggleStatus $entryInfo.Name)
+                             $sync[$entryInfo.Name].Add_Checked({
+                                 Invoke-WPFButton -Button "WPFToggleFOSSHighlight"
+                             })
+                             $sync[$entryInfo.Name].Add_Unchecked({
+                                 Invoke-WPFButton -Button "WPFToggleFOSSHighlight"
+                             })
+                        } else {
+                            $sync[$entryInfo.Name].IsChecked = (Get-WinUtilToggleStatus $entryInfo.Name)
 
-                        $sync[$entryInfo.Name].Add_Checked({
-                            [System.Object]$Sender = $args[0]
-                            Invoke-WinUtilTweaks $sender.name
-                        })
+                            $sync[$entryInfo.Name].Add_Checked({
+                                [System.Object]$Sender = $args[0]
+                                Invoke-WPFSelectedCheckboxesUpdate -type "Add" -checkboxName $Sender.name
+                                Invoke-WinUtilTweaks $Sender.name
+                            })
 
-                        $sync[$entryInfo.Name].Add_Unchecked({
-                            [System.Object]$Sender = $args[0]
-                            Invoke-WinUtiltweaks $sender.name -undo $true
-                        })
+                            $sync[$entryInfo.Name].Add_Unchecked({
+                                [System.Object]$Sender = $args[0]
+                                Invoke-WPFSelectedCheckboxesUpdate -type "Remove" -checkboxName $Sender.name
+                                Invoke-WinUtiltweaks $Sender.name -undo $true
+                            })
+                        }
                     }
 
                     "ToggleButton" {
@@ -350,6 +369,16 @@ function Invoke-WPFUIElements {
 
                         $itemsControl.Items.Add($horizontalStackPanel) | Out-Null
                         $sync[$entryInfo.Name] = $checkBox
+
+                        $sync[$entryInfo.Name].Add_Checked({
+                            [System.Object]$Sender = $args[0]
+                            Invoke-WPFSelectedCheckboxesUpdate -type "Add" -checkboxName $Sender.name
+                        })
+
+                        $sync[$entryInfo.Name].Add_Unchecked({
+                            [System.Object]$Sender = $args[0]
+                            Invoke-WPFSelectedCheckboxesUpdate -type "Remove" -checkbox $Sender.name
+                        })
                     }
                 }
             }

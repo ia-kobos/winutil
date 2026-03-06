@@ -1,16 +1,7 @@
 ---
+title: "Legacy Windows Panels"
 weight: 3
+toc: false
 ---
 
-## Features
-
-### Legacy Windows Panels
-
-- [Control Panel](control/)
-- [Network Connections](network/)
-- [Power Panel](power/)
-- [Printer Settings](printer/)
-- [Region](region/)
-- [Sound Settings](sound/)
-- [System Properties](system/)
-- [User Accounts](user/)
+{{< autolinks section="dev/features/legacy-windows-panels" >}}

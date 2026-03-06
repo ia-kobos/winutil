@@ -1,78 +1,53 @@
-# Dark Theme for Windows
+---
+title: "Dark Theme for Windows"
+description: ""
+---
 
-Last Updated: 2024-08-07
-
-
-> [!NOTE]
-     The Development Documentation is auto generated for every compilation of Winutil, meaning a part of it will always stay up-to-date. **Developers do have the ability to add custom content, which won't be updated automatically.**
-## Description
-
-Enable/Disable Dark Mode.
-
-<!-- BEGIN CUSTOM CONTENT -->
-
-<!-- END CUSTOM CONTENT -->
-
-<details>
-<summary>Preview Code</summary>
-
-```json
-{
-  "Content": "Dark Theme for Windows",
-  "Description": "Enable/Disable Dark Mode.",
-  "category": "Customize Preferences",
-  "panel": "2",
-  "Order": "a100_",
-  "Type": "Toggle",
-  "link": "https://christitustech.github.io/Winutil/dev/tweaks/Customize-Preferences/DarkMode"
-}
+```json {filename="config/tweaks.json",linenos=inline,linenostart=2143}
+  "WPFToggleDarkMode": {
+    "Content": "Dark Theme for Windows",
+    "Description": "Enable/Disable Dark Mode.",
+    "category": "Customize Preferences",
+    "panel": "2",
+    "Type": "Toggle",
+    "registry": [
+      {
+        "Path": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+        "Name": "AppsUseLightTheme",
+        "Value": "0",
+        "Type": "DWord",
+        "OriginalValue": "1",
+        "DefaultState": "false"
+      },
+      {
+        "Path": "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+        "Name": "SystemUsesLightTheme",
+        "Value": "0",
+        "Type": "DWord",
+        "OriginalValue": "1",
+        "DefaultState": "false"
+      }
+    ],
+    "InvokeScript": [
+      "
+      Invoke-WinUtilExplorerUpdate
+      if ($sync.ThemeButton.Content -eq [char]0xF08C) {
+        Invoke-WinutilThemeChange -theme \"Auto\"
+      }
+      "
+    ],
+    "UndoScript": [
+      "
+      Invoke-WinUtilExplorerUpdate
+      if ($sync.ThemeButton.Content -eq [char]0xF08C) {
+        Invoke-WinutilThemeChange -theme \"Auto\"
+      }
+      "
+    ],
 ```
 
-</details>
+## Registry Changes
 
-## Function: Invoke-WinutilDarkMode
+Applications and System Components store and retrieve configuration data to modify windows settings, so we can use the registry to change many settings in one place.
 
-```powershell
-Function Invoke-WinutilDarkMode {
-    <#
-
-    .SYNOPSIS
-        Enables/Disables Dark Mode
-
-    .PARAMETER DarkMoveEnabled
-        Indicates the current dark mode state
-
-    #>
-    Param($DarkMoveEnabled)
-    try {
-        if ($DarkMoveEnabled -eq $false) {
-            Write-Host "Enabling Dark Mode"
-            $DarkMoveValue = 0
-        } else {
-            Write-Host "Disabling Dark Mode"
-            $DarkMoveValue = 1
-        }
-
-        $Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"
-        Set-ItemProperty -Path $Path -Name AppsUseLightTheme -Value $DarkMoveValue
-        Set-ItemProperty -Path $Path -Name SystemUsesLightTheme -Value $DarkMoveValue
-    } catch [System.Security.SecurityException] {
-        Write-Warning "Unable to set $Path\$Name to $Value due to a Security Exception"
-    } catch [System.Management.Automation.ItemNotFoundException] {
-        Write-Warning $psitem.Exception.ErrorRecord
-    } catch {
-        Write-Warning "Unable to set $Name due to unhandled exception"
-        Write-Warning $psitem.Exception.StackTrace
-    }
-}
-
-```
-
-
-<!-- BEGIN SECOND CUSTOM CONTENT -->
-
-<!-- END SECOND CUSTOM CONTENT -->
-
-
-[View the JSON file](https://github.com/ChrisTitusTech/Winutil/tree/main/config/tweaks.json)
-
+You can find information about the registry on [Wikipedia](https://www.wikiwand.com/en/Windows_Registry) and [Microsoft's Website](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry).

@@ -1,12 +1,9 @@
 ---
+title: "Performance Plans"
 weight: 4
+toc: false
 ---
-
-# Table of Contents
-
-## Tweaks
 
 ### Performance Plans
 
-- [Add and Activate Ultimate Performance Profile](addultperf/)
-- [Remove Ultimate Performance Profile](removeultperf/)
+{{< autolinks section="dev/tweaks/performance-plans" >}}
